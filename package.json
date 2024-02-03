@@ -1,23 +1,24 @@
 {
-  "name": "bread-crud-24",
-  "version": "1.0.0",
-  "description": "An example CRUD app for bread",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/halfnibble/bread-crud-24.git"
-  },
-  "author": "Josh Wedekind",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/halfnibble/bread-crud-24/issues"
-  },
-  "homepage": "https://github.com/halfnibble/bread-crud-24#readme",
-  "dependencies": {
-    "dotenv": "^16.4.1",
-    "express": "^4.18.2"
-  }
+    "name": "bread-crud-24",
+    "version": "1.0.0",
+    "description": "An example CRUD app for bread",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/halfnibble/bread-crud-24.git"
+    },
+    "author": "Josh Wedekind",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/halfnibble/bread-crud-24/issues"
+    },
+    "homepage": "https://github.com/halfnibble/bread-crud-24#readme",
+    "dependencies": {
+        "dotenv": "^16.4.1",
+        "express": "^4.18.2"
+    }
 }
