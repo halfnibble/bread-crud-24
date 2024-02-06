@@ -6,8 +6,10 @@ const Index = ({ breads }) => {
         <Default>
             <h2>Index page</h2>
             <ul>
-                {breads.map((bread) => (
-                    <li key={bread.name}>{bread.name}</li>
+                {breads.map((bread, index) => (
+                    <li key={bread.name}>
+                        <a href={`/breads/${index}`}>{bread.name}</a>
+                    </li>
                 ))}
             </ul>
         </Default>
