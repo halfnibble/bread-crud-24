@@ -5,6 +5,9 @@ const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT;
 
+// MIDDLEWARE
+app.use(express.static('public'));
+
 // ROUTES
 app.get('/', (req, res) => {
     res.send('Hello Bread. Welcome to an Awesome App');
