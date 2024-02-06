@@ -10,8 +10,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:arrayIndex', (req, res) => {
-    // res.render('Show', { bread: Bread[req.params.arrayIndex]})
-    res.send(render('Show', { bread: Bread[req.params.arrayIndex] }));
+    if (Bread[req.params.arrayIndex]) {
+        // res.render('Show', { bread: Bread[req.params.arrayIndex]})
+        res.send(render('Show', { bread: Bread[req.params.arrayIndex] }));
+    } else {
+        res.status(404).send('404. Page not found.');
+    }
 });
 
 module.exports = router;
