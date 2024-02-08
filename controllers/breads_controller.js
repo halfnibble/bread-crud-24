@@ -27,12 +27,6 @@ router.get('/:arrayIndex', (req, res) => {
     }
 });
 
-// Delete Route
-router.delete('/:arrayIndex', (req, res) => {
-    Bread.splice(req.params.arrayIndex, 1);
-    res.status(303).redirect('/breads');
-});
-
 // Create Route
 router.post('/', (req, res) => {
     if (req.body.hasGluten === 'on') {
@@ -42,6 +36,24 @@ router.post('/', (req, res) => {
     }
     Bread.push(req.body);
     res.redirect('/breads');
+});
+
+// Edit Route
+router.put('/:arrayIndex', (req, res) => {
+    if (req.body.hasGluten === 'on') {
+        req.body.hasGluten = true;
+    } else {
+        req.body.hasGluten = false;
+    }
+    Bread[req.params.arrayIndex] = req.body;
+    console.log(req.body);
+    res.redirect('/breads');
+});
+
+// Delete Route
+router.delete('/:arrayIndex', (req, res) => {
+    Bread.splice(req.params.arrayIndex, 1);
+    res.status(303).redirect('/breads');
 });
 
 module.exports = router;
