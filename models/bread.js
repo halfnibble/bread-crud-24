@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const breadSchema = new Schema({
     name: { type: String, required: true },
-    hasGluten: Boolean,
+    hasGluten: { type: Boolean, default: true },
     image: { type: String, default: 'https://placehold.it/500x500.png' },
 });
 

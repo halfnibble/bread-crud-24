@@ -16,26 +16,32 @@ router.post('/', (req, res) => {
     } else {
         req.body.hasGluten = false;
     }
-    Bread.push(req.body);
+    Bread.create(req.body);
     res.redirect('/breads');
 });
 
 // List Route
 router.get('/', (req, res) => {
     // res.render('Index', { breads: Bread });
-    res.send(render('Index', { breads: Bread }));
+    // res.send(render('Index', { breads: Bread }));
+
+    Bread.find().then((breads) => {
+        console.log(breads);
+        // res.render('Index', { breads: breads });
+        res.send(render('Index', { breads: breads }));
+    });
 });
 
 // Detail Route
-router.get('/:arrayIndex', (req, res) => {
-    if (Bread[req.params.arrayIndex]) {
-        // res.render('Show', { bread: Bread[req.params.arrayIndex], index: req.params.arrayIndex })
-        res.send(
-            render('Show', { bread: Bread[req.params.arrayIndex], index: req.params.arrayIndex })
-        );
-    } else {
-        res.status(404).send('404. Bread not found.');
-    }
+router.get('/:id', (req, res) => {
+    Bread.findById(req.params.id)
+        .then((bread) => {
+            // res.render('Show', { bread: bread });
+            res.send(render('Show', { bread: bread }));
+        })
+        .catch((err) => {
+            res.status(404).send('Unable to find Timmy. :(');
+        });
 });
 
 // Edit Route Form
