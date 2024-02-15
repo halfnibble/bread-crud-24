@@ -16,6 +16,9 @@ router.post('/', (req, res) => {
     } else {
         req.body.hasGluten = false;
     }
+    if (req.body.image === '') {
+        delete req.body.image;
+    }
     Bread.create(req.body);
     res.redirect('/breads');
 });
@@ -45,27 +48,43 @@ router.get('/:id', (req, res) => {
 });
 
 // Edit Route Form
-router.get('/:arrayIndex/edit', (req, res) => {
-    // res.render('Edit', { bread: Bread[req.params.arrayIndex], index: req.params.arrayIndex });
-    res.send(render('Edit', { bread: Bread[req.params.arrayIndex], index: req.params.arrayIndex }));
+router.get('/:id/edit', (req, res) => {
+    Bread.findById(req.params.id)
+        .then((bread) => {
+            // res.render('Edit', { bread: bread });
+            res.send(render('Edit', { bread: bread }));
+        })
+        .catch((err) => {
+            res.status(404).send('Unable to find Timmy. :(');
+        });
 });
 
 // Edit Route
-router.put('/:arrayIndex', (req, res) => {
+router.put('/:id', (req, res) => {
     if (req.body.hasGluten === 'on') {
         req.body.hasGluten = true;
     } else {
         req.body.hasGluten = false;
     }
-    Bread[req.params.arrayIndex] = req.body;
-    console.log(req.body);
-    res.redirect('/breads');
+    if (req.body.image === '') {
+        delete req.body.image;
+    }
+    Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((updatedBread) => {
+        console.log(updatedBread);
+        res.redirect(`/breads/${updatedBread.id}`);
+    });
 });
 
 // Delete Route
-router.delete('/:arrayIndex', (req, res) => {
-    Bread.splice(req.params.arrayIndex, 1);
-    res.redirect('/breads');
+router.delete('/:id', (req, res) => {
+    Bread.findByIdAndDelete(req.params.id)
+        .then((deletedBread) => {
+            res.status(303).redirect('/breads');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send('Unable to delete Timmy. :(');
+        });
 });
 
 module.exports = router;

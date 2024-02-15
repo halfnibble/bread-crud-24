@@ -1,7 +1,7 @@
 const React = require('react');
 const Default = require('./layouts/Default');
 
-const Show = ({ bread, index }) => {
+const Show = ({ bread }) => {
     return (
         <Default>
             <h2>Show Page</h2>
@@ -15,10 +15,10 @@ const Show = ({ bread, index }) => {
             <li>
                 <a href='/breads'>Go home.</a>
             </li>
-            <a className='button button-primary' href={`/breads/${index}/edit`}>
+            <a className='button button-primary' href={`/breads/${bread.id}/edit`}>
                 Edit
             </a>
-            <form action={`/breads/${index}?_method=DELETE`} method='POST'>
+            <form action={`/breads/${bread.id}?_method=DELETE`} method='POST'>
                 <input type='submit' value='DELETE' />
             </form>
         </Default>
