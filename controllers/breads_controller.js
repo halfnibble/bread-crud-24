@@ -38,10 +38,20 @@ router.get('/', (req, res) => {
     });
 });
 
+// List Route for a Baker
+router.get('/bakers/:baker', (req, res) => {
+    Bread.findByBaker(req.params.baker).then((breads) => {
+        console.log(breads);
+        // res.render('Index', { breads: breads });
+        res.send(render('Index', { breads: breads, pageName: req.params.baker }));
+    });
+});
+
 // Detail Route
 router.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
         .then((bread) => {
+            console.log(bread.getBakedBy());
             // res.render('Show', { bread: bread });
             res.send(render('Show', { bread: bread }));
         })
