@@ -9,13 +9,13 @@ const breadSchema = new Schema({
 });
 
 // helper methods
-breadSchema.method('getBakedBy', function () {
+breadSchema.methods.getBakedBy = function () {
     return `${this.name} was baked with ❤️ by ${this.baker}`;
-});
+};
 
-breadSchema.static('findByBaker', function (baker) {
+breadSchema.statics.findByBaker = function (baker) {
     return this.find({ baker: baker });
-});
+};
 
 const Bread = mongoose.model('Bread', breadSchema);
 
