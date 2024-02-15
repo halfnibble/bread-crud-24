@@ -19,8 +19,11 @@ router.post('/', (req, res) => {
     if (req.body.image === '') {
         delete req.body.image;
     }
-    Bread.create(req.body);
-    res.redirect('/breads');
+    Bread.create(req.body)
+        .then(() => {
+            res.redirect('/breads');
+        })
+        .catch((err) => res.status(400).send(`Unable to save bread, reason: ${err.message}`));
 });
 
 // List Route
@@ -69,10 +72,15 @@ router.put('/:id', (req, res) => {
     if (req.body.image === '') {
         delete req.body.image;
     }
-    Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((updatedBread) => {
-        console.log(updatedBread);
-        res.redirect(`/breads/${updatedBread.id}`);
-    });
+    Bread.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then((updatedBread) => {
+            console.log(updatedBread);
+            res.redirect(`/breads/${updatedBread.id}`);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).send(`Unable to update, reason: ${err.message}`);
+        });
 });
 
 // Delete Route

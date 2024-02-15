@@ -5,6 +5,7 @@ const breadSchema = new Schema({
     name: { type: String, required: true },
     hasGluten: { type: Boolean, default: true },
     image: { type: String, default: 'https://placehold.it/500x500.png' },
+    baker: { type: String, enum: ['Rachel', 'Monica', 'Joey', 'Chandler', 'Ross', 'Phoebe'] },
 });
 
 const Bread = mongoose.model('Bread', breadSchema);
