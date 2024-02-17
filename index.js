@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
 // BREADS ROUTES
 app.use('/breads', require('./controllers/breads_controller'));
 
+// BAKERS ROUTES
+app.use('/bakers', require('./controllers/bakers_controller'));
+
 // 404 Page
 app.get('*', (req, res) => {
     res.status(404).send('404. Page not found.');
