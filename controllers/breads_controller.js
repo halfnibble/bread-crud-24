@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const Bread = require('../models/bread');
+const Baker = require('../models/baker');
 const render = require('../render');
 
 // New Route Form
 router.get('/new', (req, res) => {
-    // res.render('New');
-    res.send(render('New'));
+    Baker.find().then((bakers) => {
+        // res.render('New', { bakers: bakers });
+        res.send(render('New', { bakers: bakers }));
+    });
 });
 
 // Create Route
