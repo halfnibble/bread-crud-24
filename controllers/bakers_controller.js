@@ -11,4 +11,13 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/:id', (req, res) => {
+    Baker.findById(req.params.id)
+        .populate('breads')
+        .then((baker) => {
+            // res.render('BakerShow', { baker: baker});
+            res.send(render('BakerShow', { baker: baker }));
+        });
+});
+
 module.exports = router;

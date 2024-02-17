@@ -31,13 +31,12 @@ router.post('/', (req, res) => {
 
 // List Route
 router.get('/', (req, res) => {
-    // res.render('Index', { breads: Bread });
-    // res.send(render('Index', { breads: Bread }));
-
-    Bread.find().then((breads) => {
-        console.log(breads);
-        // res.render('Index', { breads: breads });
-        res.send(render('Index', { breads: breads }));
+    Baker.find().then((bakers) => {
+        Bread.find().then((breads) => {
+            console.log(breads);
+            // res.render('Index', { breads: breads, bakers: bakers });
+            res.send(render('Index', { breads: breads, bakers: bakers }));
+        });
     });
 });
 
