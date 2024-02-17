@@ -53,13 +53,15 @@ router.get('/bakers/:baker', (req, res) => {
 // Detail Route
 router.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
+        .populate('baker')
         .then((bread) => {
+            console.log(bread);
             console.log(bread.getBakedBy());
             // res.render('Show', { bread: bread });
             res.send(render('Show', { bread: bread }));
         })
         .catch((err) => {
-            res.status(404).send('Unable to find Timmy. :(');
+            res.status(404).send('Unable to find Timmy. :( <pre>' + err + '</pre>');
         });
 });
 
@@ -67,8 +69,10 @@ router.get('/:id', (req, res) => {
 router.get('/:id/edit', (req, res) => {
     Bread.findById(req.params.id)
         .then((bread) => {
-            // res.render('Edit', { bread: bread });
-            res.send(render('Edit', { bread: bread }));
+            Baker.find().then((bakers) => {
+                // res.render('Edit', { bread: bread, bakers: bakers });
+                res.send(render('Edit', { bread: bread, bakers: bakers }));
+            });
         })
         .catch((err) => {
             res.status(404).send('Unable to find Timmy. :(');
