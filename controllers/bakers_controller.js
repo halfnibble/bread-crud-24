@@ -13,7 +13,10 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
-        .populate('breads')
+        .populate({
+            path: 'breads',
+            options: { limit: 2 },
+        })
         .then((baker) => {
             // res.render('BakerShow', { baker: baker});
             res.send(render('BakerShow', { baker: baker }));

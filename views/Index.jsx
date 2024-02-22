@@ -10,7 +10,7 @@ const Index = ({ breads, bakers, pageName = 'Index' }) => {
                     <h3>Breads</h3>
                     <ul>
                         {breads.map((bread) => (
-                            <li key={bread.name}>
+                            <li key={bread.id}>
                                 <a href={`/breads/${bread.id}`}>{bread.name}</a>
                             </li>
                         ))}

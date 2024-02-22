@@ -30,14 +30,12 @@ router.post('/', (req, res) => {
 });
 
 // List Route
-router.get('/', (req, res) => {
-    Baker.find().then((bakers) => {
-        Bread.find().then((breads) => {
-            console.log(breads);
-            // res.render('Index', { breads: breads, bakers: bakers });
-            res.send(render('Index', { breads: breads, bakers: bakers }));
-        });
-    });
+router.get('/', async (req, res) => {
+    const breads = await Bread.find().limit(10);
+    const bakers = await Baker.find().limit(10).skip(0);
+
+    // res.render('Index', { breads: breads, bakers: bakers });
+    res.send(render('Index', { breads: breads, bakers: bakers }));
 });
 
 // List Route for a Baker
