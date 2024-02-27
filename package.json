@@ -1,11 +1,14 @@
 {
     "name": "bread-crud-24",
     "version": "1.0.0",
+    "engines": {
+        "node": "18.x"
+    },
     "description": "An example CRUD app for bread",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon index.js"
+        "start": "node index.js"
     },
     "repository": {
         "type": "git",
