@@ -1,6 +1,4 @@
-require('@babel/register')({
-    presets: ['@babel/preset-react'],
-});
+require('@babel/register')();
 
 const path = require('path');
 const React = require('react');
